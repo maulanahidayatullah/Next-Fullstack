@@ -1,6 +1,20 @@
+'use client'
 import Link from "next/link";
 
 export default function LoginPage() {
+
+    const handleLogin = (e: any) => {
+        
+        e.preventDefault();
+        fetch('/api/auth/login', {
+            method : 'POST',
+            body : JSON.stringify({
+                email : e.currentTarget.email.value,
+                password : e.currentTarget.password.value
+            })
+        })
+    }
+
     return (
         <div className="font-sans">
             <div className="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100 ">
@@ -11,14 +25,14 @@ export default function LoginPage() {
                         <label htmlFor="" className="block mt-3 text-lg text-gray-700 text-center font-semibold">
                             <h1>LOGIN</h1>
                         </label>
-                        <form method="#" action="#" className="mt-10">
+                        <form className="mt-10" onSubmit={(e) => handleLogin(e)}>
                                         
                             <div>
-                                <input type="email" placeholder="Email" className="px-2 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
+                                <input type="email" placeholder="Email" name="email" id="email" className="px-2 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
                             </div>
                 
                             <div className="mt-7">                
-                                <input type="password" placeholder="Password" className="px-2 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />                           
+                                <input type="password" placeholder="Password" name="password" id="password" className="px-2 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />                           
                             </div>
 
                             <div className="mt-7">
